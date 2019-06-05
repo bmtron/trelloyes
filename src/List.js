@@ -1,20 +1,20 @@
-import React from 'react';
-import Card from './Card.js';
+import React, { Component } from 'react';
+import Card from './Card';
 import './List.css';
 
-function List(props) {
-  return (
-    <section className='List'>
-      <header className='List-cards'>
-        {props.header}
-      </header>
-      <div className='List-cards'>
-        {props.cards.map((flugle) => 
-          <Card key={flugle.id} title={flugle.title} content={flugle.content} />
-          )}
-      </div>
-    </section>
-  )
+export default function List(props){
+    return (
+      <section className='List'>
+        <header className='List-cards'>
+          {props.header}
+        </header>
+        <div className='List-cards'>
+          {props.cards.map((card, index) => {
+            return <Card onDeleteCard={props.onDeleteCard} id={card.id} listId={props.id} key={index} title={card.title} content={card.content} />;
+          })}
+          <button onClick={() => props.onRandomCard(props.id)} type='submit'>Add Random Card</button>
+        </div>
+        
+      </section>
+    )
 }
-
-export default List;
